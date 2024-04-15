@@ -38,6 +38,19 @@ public class serviceController {
 		}
 		return null;
 	}
+	@GetMapping("/listfortest")
+	public List<Student> showData() {
+		
+		HttpHeaders header = new HttpHeaders();
+		header.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+		HttpEntity<String> entity = new HttpEntity<>(header);
+		
+		ResponseEntity<List>  rs =restTemplate.exchange("https://jsonplaceholder.typicode.com/posts", HttpMethod.GET, entity, List.class);
+		if(rs.getStatusCode().is2xxSuccessful()) {
+			return rs.getBody();
+		}
+		return null;
+	}
 	
 	@GetMapping("/savedata")
 	public String saveURICall() {
